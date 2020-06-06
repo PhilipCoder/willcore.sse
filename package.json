@@ -1,0 +1,29 @@
+{
+  "name": "willcore.sse",
+  "version": "1.0.0",
+  "description": "WillCore.UI expansion module to enable server-side events.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PhilipCoder/willcore.sse.git"
+  },
+  "keywords": [
+    "Server-side",
+    "events",
+    "WillCore"
+  ],
+  "author": "Philip Schoeman",
+  "license": "LGPL-2.1-only",
+  "bugs": {
+    "url": "https://github.com/PhilipCoder/willcore.sse/issues"
+  },
+  "homepage": "https://github.com/PhilipCoder/willcore.sse#readme",
+  "dependencies": {
+    "willcore.server": "^1.0.9",
+    "willcore.session": "^1.0.3",
+    "willcore.ui": "^1.1.8"
+  }
+}
