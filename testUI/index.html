@@ -1,0 +1,54 @@
+<div class="row">
+    <div class="col-12 text-center">
+        <h1>Chat Demo </h1>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card">
+                <div class="card-header">
+                    Session
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>Session ID:</label>
+                        <input class="form-control" type="number" id="sessionIDInput" />
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary" id="setSessionBTN">
+                        Set Session
+                    </button>
+                    <button class="btn btn-primary" id="removeSessionBTN">
+                        Remove Session
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-12 text-center">
+            <h4>Messages<span class="badge badge-danger badge-pill" id="disconnectedBadge">Disconnected</span><span class="badge badge-success badge-pill" id="connectedBadge">Connected</span></h4>
+        </div>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header" style="display: flex;flex-direction: row;">
+                   <input type="number" class="form-control col-2" placeholder="Target ID" id="targetIDInput" />
+                   <input type="text" class="form-control col-6" placeholder="Message" id="messageInput" />
+                   <button class="btn btn-primary" id="sendMessageBTN">
+                       Send Message
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div class="col-12">
+                        Messages:
+                    </div>
+                    <div class="col-12" id="chat">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -60,7 +60,7 @@ class sessionAssignable extends assignable {
     }
 
     completionResult() {
-        return sessionProxy.new();
+        return sessionProxy.new(this);
     }
 }
 

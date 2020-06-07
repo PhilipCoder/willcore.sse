@@ -1,33 +1,34 @@
 const assignable = require("willcore.core/assignable/assignable");
 const sseProxy = require("../proxies/sseProxy.js");
-const serverProxy = require("willcore.server/proxies/server/serverProxy.js");
+const uiProxy = require("willcore.ui/server/proxies/uiProxy.js");
 const sessionProxy = require("willcore.session/server_server/proxies/session/sessionProxy.js");
 const sseContainer = require("../containers/sseContainer.js");
 const path = require("path");
 
 class sseAssignable extends assignable {
     constructor() {
-        super({}, serverProxy);
+        super({}, uiProxy);
         this.interceptors = {
             before: [],
             after: []
         };
         this.activationURL = "event-stream";
         this.sessionLogic = null;
-        this.sseContainer = new sseContainer(this.sessionLogic);
     }
 
     completionResult() {
         let proxyResult = sseProxy.new(this);
-        this.parentProxy._assignable.registerRequestProxy(this.activationURL, proxyResult);
-        for (let parentAssignableName in this.parentProxy) {
-            if (this.parentProxy[parentAssignableName] instanceof sessionProxy) {
-                this.sessionLogic = this.parentProxy[this.parentProxy];
+        let serverProxy = this.parentProxy._assignable.parentProxy;
+        serverProxy._assignable.registerRequestProxy(this.activationURL, proxyResult);
+        for (let parentAssignableName in serverProxy) {
+            if (serverProxy[parentAssignableName] instanceof sessionProxy) {
+                this.sessionLogic = serverProxy[parentAssignableName];
                 break;
             }
         }
         if (!this.sessionLogic) throw "No session module was found on server.";
-
+        this.sseContainer = new sseContainer(this.sessionLogic._assignable.sessionLogic);
+        this.registerSSEFileService();
         return proxyResult;
     }
 
@@ -35,12 +36,12 @@ class sseAssignable extends assignable {
     sendEvent(id, eventName, message) {
         let responses = this.sseContainer.sseResponses[id];
         if (responses) {
-            message = {
-                event: eventName,
-                payload: message
-            };
-            let result = `data: ${JSON.stringify(message)}\n\n`;
-            responses.foreach((response) => {
+            // message = {
+            //     event: eventName,
+            //     payload: message
+            // };
+            let result = `event: ${eventName}\ndata: ${JSON.stringify(message)}\n\n\n`;
+            responses.forEach((response) => {
                 response.write(result);
             });
         }

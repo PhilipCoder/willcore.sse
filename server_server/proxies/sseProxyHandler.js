@@ -3,6 +3,7 @@ const requestProxyHandler = require("willcore.server/proxies/request/requestProx
 class sseProxyHandler extends requestProxyHandler {
   constructor(assignable) {
     super(assignable);
+    this.getTraps.unshift(this.emit);
   }
 
   emit(target, property, proxy) {

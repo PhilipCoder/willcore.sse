@@ -22,8 +22,13 @@
   },
   "homepage": "https://github.com/PhilipCoder/willcore.sse#readme",
   "dependencies": {
+    "module-alias": "^2.2.2",
+    "willcore.bootstrap": "^1.1.0",
     "willcore.server": "^1.0.9",
-    "willcore.session": "^1.0.3",
+    "willcore.session": "^1.0.4",
     "willcore.ui": "^1.1.8"
+  },
+  "_moduleAliases": {
+    "willcore.sse": "moduleContainer/willCoreModules.js"
   }
 }

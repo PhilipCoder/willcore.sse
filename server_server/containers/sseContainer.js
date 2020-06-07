@@ -25,7 +25,8 @@ class sseContainer {
             if (responseList) {
                 delete this.sseResponses[sessionId];
                 responseList.forEach(responseItem => {
-                    responseItem.end("Keep Alive");
+                    responseItem.write(`event: keepAlive\ndata: keepAlive\n\n\n`);
+                    responseItem.end();
                 });
             }
         }, this.keepAliveTimeout);
