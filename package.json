@@ -2,7 +2,7 @@
   "name": "willcore.sse",
   "version": "1.0.0",
   "description": "WillCore.UI expansion module to enable server-side events.",
-  "main": "index.js",
+  "main": "moduleContainer/willCoreModules.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,7 +21,8 @@
     "url": "https://github.com/PhilipCoder/willcore.sse/issues"
   },
   "homepage": "https://github.com/PhilipCoder/willcore.sse#readme",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "module-alias": "^2.2.2",
     "willcore.bootstrap": "^1.1.0",
     "willcore.server": "^1.0.9",
@@ -30,5 +31,10 @@
   },
   "_moduleAliases": {
     "willcore.sse": "moduleContainer/willCoreModules.js"
-  }
+  },
+  "files": [
+    "/client",
+    "/moduleContainer",
+    "/server_server"
+  ]
 }
