@@ -3,6 +3,7 @@ const sseProxy = require("../proxies/sseProxy.js");
 const serverProxy = require("willcore.server/proxies/server/serverProxy.js");
 const sessionProxy = require("willcore.session/server_server/proxies/session/sessionProxy.js");
 const sseContainer = require("../containers/sseContainer.js");
+const path = require("path");
 
 class sseAssignable extends assignable {
     constructor() {
@@ -54,6 +55,21 @@ class sseAssignable extends assignable {
     }
 
     completed() {
+    }
+
+    registerSSEFileService(){
+        const serverProxy = this.parentProxy._assignable.parentProxy;
+        let relativePath = this.getFilesFolderPath(serverProxy);
+        serverProxy[this.propertyName].files = `${relativePath}`;
+        this.parentProxy._assignable.addClientAssignable("sse",`/${this.propertyName}/sseAssignable.js`);
+    }
+
+    getFilesFolderPath(serverProxy) {
+        let endPointFolder = path.normalize(`${__dirname}/../../client`);
+        let mainExecutingDirectory = serverProxy._assignable.pathHelper.rootDirectory;
+        let relativePath = path.relative(mainExecutingDirectory, endPointFolder);
+        relativePath = "/" + relativePath.split("\\").join("/");
+        return relativePath;
     }
 }
 
